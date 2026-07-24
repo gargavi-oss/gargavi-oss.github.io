@@ -7,3 +7,4 @@ export const projects = resumeJson.projects
 export const achievements = resumeJson.achievements
 export const skills = resumeJson.skills
 export const socials = resumeJson.socials
+export const experience = resumeJson.experience
