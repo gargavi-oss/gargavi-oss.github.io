@@ -6,6 +6,7 @@ import {
   achievements,
   skills,
   socials,
+  experience,
 } from './data/resume.js'
 import { THEMES } from './data/themes.js'
 import { NAME_ART, NAME_ART_MOBILE, AVATAR_ART } from './data/ascii.js'
@@ -15,6 +16,7 @@ export const COMMAND_LIST = [
   { cmd: 'clear', desc: 'clear the terminal' },
   { cmd: 'echo', desc: 'print out anything' },
   { cmd: 'education', desc: 'my education background' },
+  { cmd: 'experience', desc: 'my technical experinece'},
   { cmd: 'email', desc: 'send an email to me' },
   { cmd: 'gui', desc: 'open my portfolio in GUI' },
   { cmd: 'help', desc: 'check available commands' },
@@ -148,6 +150,43 @@ const Education = () => (
   </Block>
 )
 
+const Experience = () =>{
+  <Block>
+   <Line className="text-t200">Here is my technical Experience</Line>
+
+{experience.map(
+  ({ id, role, highlights, duration, company, location }) => (
+    <div
+      key={id}
+      className="mt-6 border border-s2 rounded-xl p-4 bg-s1"
+    >
+      <div className="flex items-center justify-between flex-wrap">
+        <div>
+          <Line className="text-primary text-lg font-semibold">
+            {company}
+          </Line>
+          <Line className="text-t300">{role}</Line>
+        </div>
+
+        <div className="text-right">
+          <Line className="text-t200">{duration}</Line>
+          <Line className="text-t300">{location}</Line>
+        </div>
+      </div>
+
+      <ul className="mt-4 list-disc pl-5 space-y-2">
+        {highlights.map((item, index) => (
+          <li key={index} className="text-p4 text-t200">
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+)}
+  </Block>
+
+}
 const Skills = () => (
   <Block>
     <Line className="text-t200">My technical toolkit:</Line>
@@ -260,6 +299,8 @@ export function renderCommand(cmd, args, ctx) {
       return <Echo args={args} />
     case 'education':
       return <Education />
+    case 'experience':
+      return <Experience/>
     case 'email':
       return <Email />
     case 'gui':
