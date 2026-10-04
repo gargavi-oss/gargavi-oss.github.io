@@ -1,0 +1,656 @@
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE OVERRIDES — import AFTER your main portfolio CSS
+   Fixes: fixed-px card widths, tiny text, nav overflow on
+   tablets, sticky hover on touch, notches/safe areas, 100vh
+   on mobile browsers, anchor offset under fixed nav, a11y.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Base ─── */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.gui-portfolio {
+  min-height: 100vh;
+  min-height: 100dvh; /* mobile browser toolbars */
+  overflow-x: clip;   /* no sideways scroll from rotated cards, keeps sticky/fixed working */
+}
+
+/* Anchor links no longer hide under the fixed nav */
+.gui-portfolio section[id],
+.gui-portfolio [id="achievements"] {
+  scroll-margin-top: 96px;
+}
+
+.gui-portfolio img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Respect notches / rounded corners / home indicator */
+.hd-container {
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+}
+
+.hd-nav {
+  top: calc(14px + env(safe-area-inset-top, 0px));
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+}
+
+.hd-corner-toggle,
+.hd-corner-toggle-left {
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: 44px;  /* 44px = minimum comfortable tap target */
+  height: 44px;
+}
+
+.hd-corner-toggle {
+  right: max(16px, env(safe-area-inset-right));
+}
+
+.hd-corner-toggle-left {
+  left: max(16px, env(safe-area-inset-left));
+}
+
+/* ─── Fluid type (replaces stepped font-size overrides) ─── */
+.hd-hero-title {
+  font-size: clamp(2.1rem, 9vw, 4.5rem);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.hd-hero-role {
+  font-size: clamp(1.1rem, 4vw, 1.8rem);
+}
+
+.hd-hero-tagline {
+  font-size: clamp(0.98rem, 2.6vw, 1.4rem);
+}
+
+.hd-section-title {
+  font-size: clamp(1.7rem, 6vw, 2.8rem);
+}
+
+.hd-column-title {
+  font-size: clamp(1.6rem, 5vw, 2.2rem) !important;
+}
+
+.hd-section-subtitle {
+  font-size: clamp(0.98rem, 2.4vw, 1.3rem);
+}
+
+.hd-contact-text {
+  font-size: clamp(1rem, 2.6vw, 1.45rem);
+}
+
+/* Long words / URLs never blow out a card */
+.hd-card,
+.hd-exp-item-text,
+.hd-project-title,
+.hd-project-desc,
+.hd-achieve-desc {
+  overflow-wrap: anywhere;
+}
+
+/* ─── Navigation: hamburger earlier so 7 links never cramp ─── */
+@media (max-width: 1024px) {
+  .hd-nav-links {
+    display: none;
+  }
+  .hd-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px 10px;
+  }
+  .hd-mobile-menu.open {
+    display: flex;
+  }
+}
+
+.hd-mobile-menu {
+  top: calc(100% + 10px);
+  max-height: calc(100dvh - 110px - env(safe-area-inset-top, 0px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.hd-mobile-menu .hd-nav-link {
+  display: block;
+  padding: 10px 6px;
+  min-height: 44px;
+}
+
+/* ─── Tablet (769–1024): use the space, 2 columns ─── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hd-about-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hd-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+  }
+  .hd-skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hd-hero {
+    padding-top: 120px;
+  }
+}
+
+/* ─── Large screens ─── */
+@media (min-width: 1600px) {
+  .hd-container {
+    max-width: 1240px;
+  }
+  .hd-nav-inner {
+    max-width: 1240px;
+  }
+}
+
+/* ─── Phones & small tablets: fluid widths instead of 330/295/265px ─── */
+@media (max-width: 768px) {
+  .hd-container {
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+  }
+
+  .hd-about-card,
+  .hd-stats-grid,
+  .hd-timeline-card,
+  .hd-project-card,
+  .hd-skill-card,
+  .hd-edu-card,
+  .hd-achieve-card,
+  .hd-contact-box,
+  .hd-edu-col .hd-section-header,
+  .hd-achieve-col .hd-section-header {
+    width: 100%;
+    max-width: min(100%, 560px);
+  }
+
+  .hd-timeline {
+    max-width: min(100%, 620px);
+  }
+
+  .hd-social-grid {
+    max-width: min(100%, 420px);
+  }
+
+  /* Comfortable card padding (was 9–13px on small phones) */
+  .hd-about-card,
+  .hd-timeline-card,
+  .hd-skill-card,
+  .hd-edu-card,
+  .hd-achieve-card {
+    padding: 16px 14px;
+  }
+
+  .hd-project-card {
+    padding: 14px 12px;
+  }
+
+  .hd-contact-box {
+    padding: 24px 16px;
+  }
+
+  /* Buttons: full-width friendly, 44px tap height */
+  .hd-btn {
+    width: 100%;
+    max-width: 320px;
+    min-height: 46px;
+    font-size: 1rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .hd-hero-actions {
+    width: 100%;
+  }
+
+  .hd-project-btn {
+    min-height: 44px;
+    max-width: 100%;
+    font-size: 0.9rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .hd-project-tab {
+    min-height: 40px;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .hd-social-card {
+    min-height: 56px;
+  }
+
+  /* Project image: keep aspect ratio, drop the hard max-height crop */
+  .hd-project-image-wrap {
+    max-height: none;
+  }
+
+  /* Readable text floor (~14px+) — was as low as 11px */
+  .hd-exp-list li,
+  .hd-project-desc,
+  .hd-achieve-desc,
+  .hd-about-line {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .hd-exp-bullet {
+    font-size: 0.85rem;
+  }
+
+  .hd-tech-pill,
+  .hd-exp-meta-chip,
+  .hd-edu-pill,
+  .hd-coursework-tag,
+  .hd-skill-tag,
+  .hd-achieve-badge,
+  .hd-project-category,
+  .hd-exp-badge,
+  .hd-tab-count {
+    font-size: 0.8rem;
+  }
+
+  .hd-stat-label {
+    font-size: 0.88rem;
+  }
+
+  .hd-hero-badge {
+    font-size: 0.9rem;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hd-corner-toggle,
+  .hd-corner-toggle-left {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Very narrow phones (≤360px): fit, don't shrink fonts further */
+@media (max-width: 360px) {
+  .hd-hero-title {
+    font-size: 1.9rem;
+  }
+  .hd-project-card,
+  .hd-timeline-card,
+  .hd-skill-card,
+  .hd-edu-card,
+  .hd-achieve-card,
+  .hd-about-card,
+  .hd-contact-box {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .hd-stats-grid {
+    gap: 8px;
+  }
+}
+
+/* Short landscape phones: don't waste the screen */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hd-hero {
+    padding-top: 90px;
+    padding-bottom: 30px;
+  }
+  .hd-section {
+    padding-top: 40px;
+  }
+}
+
+/* ─── Touch devices: no sticky hover lift/rotate ─── */
+@media (hover: none) {
+  .hd-card:hover,
+  .hd-project-card:hover,
+  .hd-stat-card:hover,
+  .hd-skill-card:hover,
+  .hd-timeline-card:hover,
+  .hd-edu-card:hover,
+  .hd-achieve-card:hover,
+  .hd-social-card:hover,
+  .hd-skill-tag:hover,
+  .hd-coursework-tag:hover,
+  .hd-project-tab:hover,
+  .hd-nav-link:hover,
+  .hd-hero-badge:hover {
+    transform: none;
+  }
+
+  .hd-project-card:hover .hd-project-image {
+    transform: none;
+  }
+
+  /* Pressed feedback instead */
+  .hd-btn:active,
+  .hd-project-btn:active,
+  .hd-social-card:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+}
+
+/* ─── Accessibility ─── */
+.gui-portfolio a:focus-visible,
+.gui-portfolio button:focus-visible {
+  outline: 3px solid var(--hd-blue);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .gui-portfolio *,
+  .gui-portfolio *::before,
+  .gui-portfolio *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE GRID SYSTEM (≤ 768px)
+   One gutter, every block edge-aligned, equal-width items.
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  .gui-portfolio {
+    --gutter: 16px;
+    --gap: 14px;
+  }
+
+  /* One consistent left/right edge for the whole page */
+  .hd-container {
+    padding-left: max(var(--gutter), env(safe-area-inset-left));
+    padding-right: max(var(--gutter), env(safe-area-inset-right));
+  }
+
+  /* Every block fills the same column width — no more narrow centred cards */
+  .hd-about-card,
+  .hd-stats-grid,
+  .hd-timeline,
+  .hd-timeline-card,
+  .hd-project-card,
+  .hd-skill-card,
+  .hd-edu-card,
+  .hd-achieve-card,
+  .hd-contact-box,
+  .hd-social-grid,
+  .hd-edu-col .hd-section-header,
+  .hd-achieve-col .hd-section-header {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Leave room on the right/bottom for the hard offset shadow */
+  .hd-card,
+  .hd-stat-card {
+    margin-right: 0;
+    box-shadow: 3px 3px 0 0 var(--hd-shadow-color);
+  }
+
+  /* Consistent vertical rhythm */
+  .hd-section {
+    padding: 44px 0 10px;
+  }
+  .hd-section-header {
+    margin-bottom: 22px;
+  }
+
+  /* ─── Nav: compact bar ─── */
+  .hd-nav-inner {
+    padding: 8px 14px;
+  }
+  .hd-nav-logo {
+    font-size: 1.3rem;
+  }
+
+  /* ─── Hero: stacked, equal-width buttons ─── */
+  .hd-hero {
+    padding-top: calc(86px + env(safe-area-inset-top, 0px));
+    padding-bottom: 28px;
+  }
+  .hd-hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap);
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .hd-hero-actions .hd-btn {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* ─── About: stack, stats as an even 2×2 grid ─── */
+  .hd-about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap);
+    align-items: stretch;
+  }
+  .hd-about-card {
+    padding: 18px 16px;
+  }
+  .hd-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;      /* all four boxes identical height */
+    gap: var(--gap);
+  }
+  .hd-stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 8px;
+    min-height: 96px;
+  }
+  .hd-stat-num {
+    font-size: 2rem;
+  }
+
+  /* ─── Experience: full-width cards on a slim timeline ─── */
+  .hd-timeline {
+    padding-left: 22px;
+  }
+  .hd-timeline::before {
+    left: 8px;
+  }
+  .hd-timeline-dot {
+    left: -22px;
+    top: 18px;
+    width: 16px;
+    height: 16px;
+  }
+  .hd-timeline-item {
+    margin-bottom: var(--gap);
+  }
+  .hd-exp-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ─── Projects: filter tabs as a 2×2 grid, cards in one even column ─── */
+  .hd-project-tabs-container {
+    width: 100%;
+  }
+  .hd-project-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    overflow: visible;
+    padding: 4px 2px 8px;
+  }
+  .hd-project-tab {
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.2;
+    min-height: 44px;
+    padding: 6px 8px;
+  }
+  .hd-projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: stretch;
+  }
+  .hd-project-card {
+    margin: 0;
+    height: auto;
+  }
+  .hd-project-image-wrap {
+    aspect-ratio: 16 / 9;
+    max-height: none;
+  }
+  .hd-project-tech {
+    gap: 6px;
+  }
+  .hd-tech-pill {
+    flex: 1 1 auto;           /* pills spread to fill each row evenly */
+    text-align: center;
+  }
+  .hd-project-footer {
+    padding-top: 12px;
+  }
+  .hd-project-btn {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+  .hd-load-more-btn {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  /* ─── Skills: one column, tags spread evenly across each row ─── */
+  .hd-skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap);
+    align-items: stretch;
+  }
+  .hd-skill-tags {
+    gap: 8px;
+  }
+  .hd-skill-tag {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  /* ─── Education & Achievements: stacked, equal width ─── */
+  .hd-dual-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .hd-edu-col,
+  .hd-achieve-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap);
+    align-content: start;
+    margin: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .hd-edu-col .hd-section-header,
+  .hd-achieve-col .hd-section-header {
+    text-align: center !important;
+    margin-bottom: 8px !important;
+  }
+  .hd-edu-card,
+  .hd-achieve-card {
+    margin: 0;
+  }
+  .hd-edu-meta-badges,
+  .hd-coursework-tags {
+    gap: 8px;
+  }
+  .hd-edu-pill,
+  .hd-coursework-tag {
+    flex: 1 1 auto;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* ─── Contact: 2-column buttons, odd one out fills the row ─── */
+  .hd-contact-box {
+    padding: 26px 16px;
+  }
+  .hd-social-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .hd-social-card {
+    flex: 1 1 calc(50% - 5px);  /* 2 per row; a lone last item stretches full width */
+    min-width: 120px;
+  }
+  .hd-contact-box > .hd-btn {
+    width: 100%;
+    max-width: none;
+    font-size: 1.05rem !important;
+    padding: 12px 16px !important;
+  }
+
+  /* ─── Footer ─── */
+  .hd-footer {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); /* clear the floating corner buttons */
+  }
+  .hd-footer-content p:last-child {
+    font-size: 0.85rem !important;
+  }
+}
+
+/* ─── Large phones / small tablets (600–768px): 2-column grids ─── */
+@media (min-width: 600px) and (max-width: 768px) {
+  .hd-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .hd-project-tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .hd-projects-grid,
+  .hd-skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hd-hero-actions {
+    grid-template-columns: 1fr 1fr;
+    max-width: 520px;
+  }
+}
+
+/* ─── Small phones (≤ 380px): tighten, keep the grid ─── */
+@media (max-width: 380px) {
+  .gui-portfolio {
+    --gutter: 12px;
+    --gap: 12px;
+  }
+  .hd-stat-num {
+    font-size: 1.7rem;
+  }
+  .hd-social-card {
+    flex-basis: 100%;   /* single column on very narrow screens */
+  }
+}

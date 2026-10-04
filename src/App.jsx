@@ -3,6 +3,7 @@ import Terminal from './components/Terminal.jsx'
 import GUIPortfolio from './components/GUIPortfolio.jsx'
 import { THEMES, DEFAULT_THEME } from './data/themes.js'
 import './gui.css'
+import './responsive.css'
 
 const THEME_KEY = 'avi-terminal-theme'
 const MODE_KEY = 'avi-portfolio-mode'
