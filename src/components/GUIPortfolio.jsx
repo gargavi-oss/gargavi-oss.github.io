@@ -22,6 +22,14 @@ import {
   ArrowUpRight,
   Menu,
   X,
+  Sun,
+  Moon,
+  Calendar,
+  MapPin,
+  Briefcase,
+  GraduationCap,
+  Trophy,
+  Star,
 } from 'lucide-react'
 
 function GithubIcon({ size = 22, ...props }) {
@@ -64,7 +72,7 @@ function LinkedinIcon({ size = 22, ...props }) {
 }
 
 /* ─── Hand-Drawn Squiggly Underline SVG ─── */
-function WavyUnderline({ stroke = '#ff4d4d' }) {
+function WavyUnderline({ stroke = 'var(--hd-accent)' }) {
   return (
     <svg
       className="hd-section-title-svg"
@@ -95,14 +103,14 @@ function DoodleArrow() {
     >
       <path
         d="M6 10 C 22 2, 40 8, 48 26 C 50 30, 52 35, 54 40"
-        stroke="#ff4d4d"
+        stroke="var(--hd-accent)"
         strokeWidth="2.8"
         strokeLinecap="round"
         strokeDasharray="4 3"
       />
       <path
         d="M44 38 L 54 41 L 56 30"
-        stroke="#ff4d4d"
+        stroke="var(--hd-accent)"
         strokeWidth="2.8"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -112,9 +120,9 @@ function DoodleArrow() {
 }
 
 /* ─── Navigation Header ─── */
-function Nav() {
+function Nav({ isDark, onToggleTheme }) {
   const [isOpen, setIsOpen] = useState(false)
-  const links = ['about', 'experience', 'projects', 'skills', 'education', 'contact']
+  const links = ['about', 'experience', 'projects', 'skills', 'education', 'achievements', 'contact']
 
   return (
     <header className="hd-nav">
@@ -131,16 +139,10 @@ function Nav() {
               {link.charAt(0).toUpperCase() + link.slice(1)}
             </a>
           ))}
-          <a
-            href="/avi_s_resume-17.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hd-btn hd-btn-yellow"
-            style={{ padding: '6px 16px', minHeight: '36px', fontSize: '1rem' }}
-          >
-            <FileText size={16} strokeWidth={2.5} />
-            Resume
-          </a>
+         
+
+          {/* Theme Toggle Button */}
+       
         </nav>
 
         {/* Mobile Hamburger */}
@@ -162,20 +164,11 @@ function Nav() {
             className="hd-nav-link"
             onClick={() => setIsOpen(false)}
           >
-            ✏️ {link.charAt(0).toUpperCase() + link.slice(1)}
+            {link.charAt(0).toUpperCase() + link.slice(1)}
           </a>
         ))}
-        <a
-          href="/avi_s_resume-17.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hd-btn hd-btn-yellow"
-          style={{ width: '100%', textAlign: 'center' }}
-          onClick={() => setIsOpen(false)}
-        >
-          <FileText size={18} strokeWidth={2.5} />
-          View Resume (PDF)
-        </a>
+ 
+      
       </div>
     </header>
   )
@@ -201,7 +194,7 @@ function Hero() {
             viewBox="0 0 100 8"
             preserveAspectRatio="none"
           >
-            <path d="M0 5 Q 50 1 100 5" stroke="#2d5da1" strokeWidth="2.5" fill="none" />
+            <path d="M0 5 Q 50 1 100 5" stroke="var(--hd-blue)" strokeWidth="2.5" fill="none" />
           </svg>
         </span>
       </div>
@@ -315,19 +308,34 @@ function ExperienceSection() {
             <div className="hd-card hd-timeline-card">
               <div className="hd-tack" />
               <div className="hd-exp-header">
-                <div>
-                  <h3 className="hd-exp-company">{exp.company}</h3>
-                  <p className="hd-exp-role">{exp.role}</p>
+                <div className="hd-exp-title-block">
+                  <div className="hd-exp-company-row">
+                    <h3 className="hd-exp-company">{exp.company}</h3>
+                    <span className="hd-exp-badge">Internship</span>
+                  </div>
+                  <p className="hd-exp-role">
+                    <Briefcase size={16} strokeWidth={2.4} className="hd-role-icon" />
+                    <span>{exp.role}</span>
+                  </p>
                 </div>
                 <div className="hd-exp-meta">
-                  <div className="hd-exp-duration">{exp.duration}</div>
-                  <div className="hd-exp-location">📍 {exp.location}</div>
+                  <div className="hd-exp-meta-chip">
+                    <Calendar size={14} strokeWidth={2.4} />
+                    <span>{exp.duration}</span>
+                  </div>
+                  <div className="hd-exp-meta-chip">
+                    <MapPin size={14} strokeWidth={2.4} />
+                    <span>{exp.location}</span>
+                  </div>
                 </div>
               </div>
 
               <ul className="hd-exp-list">
                 {exp.highlights.map((item, i) => (
-                  <li key={i}>{item}</li>
+                  <li key={i}>
+                    <span className="hd-exp-bullet">✦</span>
+                    <span className="hd-exp-item-text">{item}</span>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -338,8 +346,42 @@ function ExperienceSection() {
   )
 }
 
+
 /* ─── Projects Section ─── */
 function ProjectsSection() {
+  const [filter, setFilter] = useState('All')
+
+  const getCategory = (project) => {
+    const tech = (project.tech || []).map((t) => t.toLowerCase())
+    const title = project.title.toLowerCase()
+    const desc = project.desc.toLowerCase()
+
+    if (
+      tech.includes('langgraph') ||
+      tech.includes('openai api') ||
+      title.includes('ai customer') ||
+      title.includes('docforensic')
+    ) {
+      return 'AI & Agents'
+    }
+    if (
+      tech.includes('xgboost') ||
+      tech.includes('pytorch') ||
+      desc.includes('prediction') ||
+      desc.includes('malaria')
+    ) {
+      return 'Machine Learning'
+    }
+    return 'Full-Stack & Systems'
+  }
+
+  const categories = ['All', 'AI & Agents', 'Full-Stack & Systems', 'Machine Learning']
+
+  const filteredProjects = projects.filter((project) => {
+    if (filter === 'All') return true
+    return getCategory(project) === filter
+  })
+
   return (
     <section id="projects" className="hd-section hd-container">
       <div className="hd-section-header">
@@ -351,37 +393,67 @@ function ProjectsSection() {
           </h2>
         </div>
         <p className="hd-section-subtitle">
-          "Talk is cheap. Show me the code." Here are selected projects from AI systems to full-stack platforms.
+          "Talk is cheap. Show me the code." Selected projects spanning autonomous AI agents, machine learning, and scalable backends.
         </p>
+
+        {/* Mobile-Friendly Category Filter Tabs */}
+        <div className="hd-project-tabs-container">
+          <div className="hd-project-tabs" role="tablist" aria-label="Filter projects by domain">
+            {categories.map((cat) => {
+              const count = cat === 'All' ? projects.length : projects.filter((p) => getCategory(p) === cat).length
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  className={`hd-project-tab ${filter === cat ? 'active' : ''}`}
+                  onClick={() => setFilter(cat)}
+                  aria-selected={filter === cat}
+                >
+                  <span>{cat}</span>
+                  <span className="hd-tab-count">{count}</span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
       </div>
 
       <div className="hd-projects-grid">
-        {projects.map((project, idx) => {
+        {filteredProjects.map((project, idx) => {
+          const categoryTag = getCategory(project)
 
           return (
-            <a
+            <div
               key={project.id}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`hd-card hd-project-card `}
+              className="hd-card hd-project-card"
             >
               {/* Tape or Tack Decoration */}
               {idx % 2 === 0 ? <div className="hd-tape" /> : <div className="hd-tack" />}
 
-              <div>
+              <div className="hd-project-content">
                 <div className="hd-project-top">
-                  <span className="hd-project-num">#{project.id}</span>
+                  <span className="hd-project-num">#{String(project.id).padStart(2, '0')}</span>
                   <span className="hd-project-category">
-                    {project.tech?.[0] || 'Full-Stack'}
+                    {categoryTag}
                   </span>
                 </div>
+
+                {project.image && (
+                  <div className="hd-project-image-wrap">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="hd-project-image"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
 
                 <h3 className="hd-project-title">{project.title}</h3>
                 <p className="hd-project-desc">{project.desc}</p>
               </div>
 
-              <div>
+              <div className="hd-project-footer">
                 {project.tech && (
                   <div className="hd-project-tech">
                     {project.tech.map((t) => (
@@ -392,12 +464,19 @@ function ProjectsSection() {
                   </div>
                 )}
 
-                <span className="hd-project-link">
-                  Open Project Repository
-                  <ExternalLink size={16} strokeWidth={2.5} />
-                </span>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hd-project-btn"
+                  aria-label={`Open repository for ${project.title}`}
+                >
+                  <GithubIcon size={18} />
+                  <span>View Project Code</span>
+                  <ExternalLink size={15} strokeWidth={2.4} />
+                </a>
               </div>
-            </a>
+            </div>
           )
         })}
       </div>
@@ -459,45 +538,136 @@ function EducationAndHonors() {
     <section id="education" className="hd-section hd-container">
       <div className="hd-dual-grid">
         {/* Education Column */}
-        <div>
+        <div className="hd-edu-col">
           <div className="hd-section-header" style={{ textAlign: 'left', marginBottom: '24px' }}>
             <span className="hd-section-tag">Academics</span>
             <div>
-              <h2 className="hd-section-title" style={{ fontSize: '2.2rem' }}>
+              <h2 className="hd-section-title hd-column-title">
                 Education 🎓
                 <WavyUnderline />
               </h2>
             </div>
           </div>
 
-          {education.map((item, idx) => (
-            <div key={idx} className="hd-card hd-edu-card">
-              <div className="hd-tape" />
-              <h3 className="hd-item-title">{item.title}</h3>
-              <p className="hd-item-desc">{item.desc}</p>
-            </div>
-          ))}
+          {education.map((item, idx) => {
+            const isCoursework =
+              item.title.toLowerCase().includes('coursework') || item.desc.includes('·')
+
+            if (isCoursework) {
+              const courses = item.desc
+                .split('·')
+                .map((c) => c.trim())
+                .filter(Boolean)
+
+              return (
+                <div key={idx} className="hd-card hd-edu-card">
+                  <div className="hd-tape" />
+                  <div className="hd-edu-header">
+                    <div className="hd-edu-icon">
+                      <BookOpen size={18} strokeWidth={2.4} />
+                    </div>
+                    <div>
+                      <h3 className="hd-item-title">{item.title}</h3>
+                      <p className="hd-edu-subtitle">Key subjects & theoretical foundations</p>
+                    </div>
+                  </div>
+                  <div className="hd-coursework-tags">
+                    {courses.map((course) => (
+                      <span key={course} className="hd-coursework-tag">
+                        {course}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )
+            }
+
+            // Degree card: Thapar Institute
+            return (
+              <div key={idx} className="hd-card hd-edu-card">
+                <div className="hd-tape" />
+                <div className="hd-edu-header">
+                  <div className="hd-edu-icon">
+                    <GraduationCap size={20} strokeWidth={2.4} />
+                  </div>
+                  <div>
+                    <h3 className="hd-edu-inst">Thapar Institute of Engineering & Technology</h3>
+                    <p className="hd-edu-degree">{item.title}</p>
+                  </div>
+                </div>
+
+                <div className="hd-edu-meta-badges">
+                  <span className="hd-edu-pill hd-edu-pill-highlight">
+                    <Star size={14} strokeWidth={2.5} />
+                    <span>CGPA 8.79 / 10</span>
+                  </span>
+                  <span className="hd-edu-pill">
+                    <Calendar size={14} strokeWidth={2.4} />
+                    <span>Aug 2024 - May 2028</span>
+                  </span>
+                  <span className="hd-edu-pill">
+                    <MapPin size={14} strokeWidth={2.4} />
+                    <span>Patiala, Punjab</span>
+                  </span>
+                </div>
+              </div>
+            )
+          })}
         </div>
 
         {/* Honors & Achievements Column */}
-        <div>
+        <div id="achievements" className="hd-achieve-col">
           <div className="hd-section-header" style={{ textAlign: 'left', marginBottom: '24px' }}>
             <span className="hd-section-tag">Recognition</span>
             <div>
-              <h2 className="hd-section-title" style={{ fontSize: '2.2rem' }}>
+              <h2 className="hd-section-title hd-column-title">
                 Achievements 🏆
                 <WavyUnderline stroke="#2d5da1" />
               </h2>
             </div>
           </div>
 
-          {achievements.map((item, idx) => (
-            <div key={idx} className="hd-card hd-achieve-card hd-card-yellow">
-              <div className="hd-tack" />
-              <h3 className="hd-item-title">★ {item.title}</h3>
-              <p className="hd-item-desc">{item.desc}</p>
-            </div>
-          ))}
+          {achievements.map((item, idx) => {
+            const isHackathon =
+              item.title.toLowerCase().includes('niohack') ||
+              item.title.toLowerCase().includes('award')
+            const isLeetcode = item.title.toLowerCase().includes('leetcode')
+
+            return (
+              <div key={idx} className="hd-card hd-achieve-card hd-card-yellow">
+                <div className="hd-tack" />
+                <div className="hd-achieve-header">
+                  <div className="hd-achieve-icon-badge">
+                    {isHackathon ? (
+                      <Trophy size={20} strokeWidth={2.4} />
+                    ) : (
+                      <Code size={20} strokeWidth={2.4} />
+                    )}
+                  </div>
+                  <div className="hd-achieve-info">
+                    <h3 className="hd-achieve-title">{item.title}</h3>
+                    <div className="hd-achieve-badges">
+                      {isHackathon && (
+                        <>
+                          <span className="hd-achieve-badge">🏆 Hackathon Winner</span>
+                          <span className="hd-achieve-badge">Team Nexora</span>
+                          <span className="hd-achieve-badge">2026</span>
+                        </>
+                      )}
+                      {isLeetcode && (
+                        <>
+                          <span className="hd-achieve-badge">⚡ 100+ Solved</span>
+                          <span className="hd-achieve-badge">DSA & Algorithms</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <p className="hd-achieve-desc">{item.desc}</p>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
@@ -580,12 +750,40 @@ function Footer() {
 
 /* ─── Main Hand-Drawn GUI Portfolio Component ─── */
 export default function GUIPortfolio({ onSwitchMode }) {
-  return (
-    <div className="gui-portfolio">
-      {/* Sketchpad Navigation */}
-      <Nav />
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof localStorage !== 'undefined') {
+      const saved = localStorage.getItem('avi-gui-theme')
+      if (saved) return saved === 'dark'
+    }
+    return true
+  })
 
-      {/* Tiny Hand-Drawn Stamp Toggle for Terminal Mode */}
+  const toggleTheme = () => {
+    setIsDark((prev) => {
+      const next = !prev
+      try {
+        localStorage.setItem('avi-gui-theme', next ? 'dark' : 'light')
+      } catch {}
+      return next
+    })
+  }
+
+  return (
+    <div className={`gui-portfolio ${isDark ? 'hd-dark' : ''}`}>
+      {/* Sketchpad Navigation */}
+      <Nav isDark={isDark} onToggleTheme={toggleTheme} />
+
+      {/* Hand-Drawn Stamp Theme Toggle — Bottom-Left Corner */}
+      <button
+        onClick={toggleTheme}
+        className="hd-corner-toggle-left"
+        title={isDark ? 'Switch to Light Paper Mode' : 'Switch to Dark Mode'}
+        aria-label={isDark ? 'Switch to Light Paper Mode' : 'Switch to Dark Mode'}
+      >
+        {isDark ? <Sun size={22} strokeWidth={2.5} /> : <Moon size={22} strokeWidth={2.5} />}
+      </button>
+
+      {/* Tiny Hand-Drawn Stamp Toggle for Terminal Mode — Bottom-Right Corner */}
       {onSwitchMode && (
         <button
           onClick={onSwitchMode}

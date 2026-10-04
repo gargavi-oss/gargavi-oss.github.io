@@ -3,7 +3,7 @@
     "name": "Avi Garg",
     "role": "Full-Stack Developer & Software Engineer",
     "host": "terminal.gargavi-oss.space",
-    "tagline": "B.E. Electronics & Communication @ Thapar Institute. Hands-on full-stack development across the SDLC – requirements, design, build, and unit testing.",
+    "tagline": "B.E. Electronics & Communication  Thapar Institute. Hands-on full-stack development across the SDLC – requirements, design, build, and unit testing.",
     "location": "Patiala, Punjab, India",
     "email": "avigarg258@gmail.com",
     "phone": "+91 7404648978",
@@ -41,7 +41,6 @@
       "highlights": [
         "Analysed requirements and performed component-level design for 8+ RESTful API endpoints using Node.js and Express.js, building and unit testing the code for production applications used by internal and client-facing teams.",
         "Debugged and resolved 3+ production issues per sprint, performing root-cause and impact analysis and implementing fixes supported by unit and integration testing.",
-        "Reported accurate status on deliverables and flagged risks/issues to tech leads during Agile ceremonies, contributing to code reviews, CI/CD pipelines, and release activities to deliver features reliably.",
         "Shared technical knowledge across the team through documentation and pair debugging sessions, supporting consistent engineering standards."
       ]
     }
@@ -51,7 +50,8 @@
     {
       "id": 1,
       "title": "AI Customer Support Platform",
-      "desc": "Multi-tenant AI customer support platform built with Next.js, TypeScript, PostgreSQL, ScaleKit, and OpenAI API. Features secure organization management, role-based access control, isolated chatbot environments, conversation history, and knowledge-base management.",
+      "image": "/projects/project-1.png",
+      "desc": "Multi-tenant AI support platform with role-based access, OpenAI chat, and isolated business knowledge bases.",
       "url": "https://github.com/gargavi-oss/Ai-CustomerSupport-ChatBot",
       "tech": [
         "Next.js",
@@ -64,7 +64,8 @@
     {
       "id": 2,
       "title": "DocForensic Ai",
-      "desc": "Hackathon project: 6-agent LangGraph orchestration pipeline in Python & FastAPI to analyze invoices with sub-10s latency, visual forensics engine using OpenCV & Pillow (Error Level Analysis & perceptual hashing), and real-time React + TypeScript frontend with Server-Sent Events (SSE).",
+      "image": "/projects/project-2.jpg",
+      "desc": "6-agent LangGraph pipeline in FastAPI with OpenCV visual forgery analysis and real-time SSE live execution DAG traces.",
       "url": "https://github.com/gargavi-oss",
       "tech": [
         "React",
@@ -79,7 +80,8 @@
     {
       "id": 3,
       "title": "AI-Powered Delivery Failure Prediction System",
-      "desc": "Machine learning system using XGBoost (96.18% validation accuracy, 0.93 F1-score, 0.99 AUC-ROC) with a 61-feature pipeline (traffic-pressure, reliability-risk, distance-cost) and React + FastAPI dashboard for real-time delivery risk prediction.",
+      "image": "/projects/project-3.png",
+      "desc": "XGBoost ML system (96.2% accuracy) with a 61-feature pipeline and real-time FastAPI dashboard for delivery risk.",
       "url": "https://github.com/gargavi-oss/DeliveryFailurePredictor",
       "tech": [
         "Python",
@@ -94,7 +96,8 @@
     {
       "id": 4,
       "title": "Banking Transaction Backend API",
-      "desc": "Secure banking backend built with Node.js, Express.js, MongoDB, JWT Authentication, Docker, and REST APIs featuring multi-account management, idempotent fund transfers, and deployed on AWS EC2 & Render.",
+      "image": "/projects/project-4.png",
+      "desc": "Secure banking backend with JWT auth, multi-account ledger, and idempotent transfers deployed on AWS EC2.",
       "url": "https://github.com/gargavi-oss/backendBankingSystem",
       "tech": [
         "Node.js",
@@ -108,7 +111,8 @@
     {
       "id": 5,
       "title": "Prodivity Technologies",
-      "desc": "Full-stack MERN platform for a freelance agency with secure admin dashboard, REST APIs, MongoDB, authentication, and dynamic content management.",
+      "image": "/projects/project-5.png",
+      "desc": "Full-stack MERN agency platform with secure admin dashboard, dynamic content management, and REST APIs.",
       "url": "https://github.com/gargavi-oss/ProdivityTechnologies",
       "tech": [
         "React",
@@ -121,7 +125,8 @@
     {
       "id": 6,
       "title": "Deep Learning Malaria Detection System",
-      "desc": "ResNet-18 based deep learning application with FastAPI backend and React frontend for malaria diagnosis using microscopic blood smear images.",
+      "image": "/projects/project-6.png",
+      "desc": "ResNet-18 deep learning diagnostic app classifying microscopic blood smear cell images with FastAPI & React.",
       "url": "https://github.com/gargavi-oss/malaria_project",
       "tech": [
         "PyTorch",
@@ -140,10 +145,6 @@
     {
       "title": "LeetCode Problem Solving",
       "desc": "Solved 100+ Data Structures & Algorithms problems on LeetCode, strengthening problem-solving and analytical skills."
-    },
-    {
-      "title": "Open Source & Version Control",
-      "desc": "Built and maintained multiple production-ready full-stack and backend projects using Git, GitHub, Docker, AWS, Render, and modern CI/CD workflows."
     }
   ],
 
