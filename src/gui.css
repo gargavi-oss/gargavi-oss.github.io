@@ -5,6 +5,9 @@
    ═══════════════════════════════════════════════════════════ */
 
 /* ─── Light Mode (Default Warm Paper) ─── */
+
+
+
 .gui-portfolio {
   /* Core Colors */
   --hd-bg: #fdfbf7;              /* Warm Paper */
@@ -1100,6 +1103,37 @@
   box-shadow: none;
 }
 
+/* ─── Load More Button (Mobile Projects) ─── */
+.hd-load-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.hd-load-more-btn {
+  background: var(--hd-yellow);
+  color: var(--hd-yellow-fg);
+  border-color: var(--hd-border);
+  font-size: 1rem;
+  padding: 10px 24px;
+  gap: 8px;
+  box-shadow: var(--hd-shadow-md);
+  transform: rotate(-1deg);
+  transition: all var(--hd-transition);
+}
+
+.hd-load-more-btn:hover {
+  background: var(--hd-accent);
+  color: #ffffff;
+  transform: rotate(0deg) translateY(-2px);
+  box-shadow: var(--hd-shadow-sm);
+}
+
+.hd-load-more-btn:active {
+  transform: translate(2px, 2px) rotate(0deg);
+  box-shadow: none;
+}
+
 /* ─── Skills Section ─── */
 .hd-skills-grid {
   display: grid;
@@ -1605,10 +1639,18 @@
     line-height: 1.45;
   }
 
+  .hd-hero-actions {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
   .hd-btn {
     padding: 8px 16px;
     font-size: 0.95rem;
     min-height: 40px;
+    width: 100%;
+    max-width: 260px;
   }
 
   /* About Mobile */
@@ -1850,6 +1892,17 @@
     gap: 5px;
   }
 
+  .hd-load-more-wrap {
+    margin-top: 16px;
+  }
+
+  .hd-load-more-btn {
+    font-size: 0.88rem;
+    padding: 8px 18px;
+    max-width: 220px;
+    width: 100%;
+  }
+
   /* Skills Mobile */
   .hd-skills-grid {
     display: flex;
@@ -1903,22 +1956,29 @@
     font-size: 1.55rem !important;
   }
 
-  .hd-edu-col {
-    margin-bottom: 20px;
+  .hd-edu-col,
+  .hd-achieve-col {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
   }
 
+  .hd-edu-col {
+    margin-bottom: 20px;
+  }
+
   .hd-achieve-col {
     margin-top: 16px;
     padding-top: 20px;
     border-top: 2px dashed var(--hd-muted);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  }
+
+  .hd-edu-col .hd-section-header,
+  .hd-achieve-col .hd-section-header {
+    text-align: center !important;
     width: 100%;
+    max-width: 330px;
   }
 
   .hd-edu-card,
@@ -2025,8 +2085,54 @@
     line-height: 1.45;
   }
 
-.hd-social-grid { grid-template-columns: repeat(2, 130px); justify-content: center; gap: 10px; margin-bottom: 24px; } 
-.hd-social-card { width: 130px; padding: 10px 8px; font-size: 0.95rem; gap: 5px; }
+  .hd-footer {
+    padding: 28px 0 22px;
+    margin-top: 30px;
+  }
+
+  .hd-footer-content {
+    font-size: 1rem;
+  }
+
+  /* Disable hover rotations on touch devices */
+  .hd-card:hover {
+    transform: none;
+  }
+
+  .hd-project-card:hover {
+    transform: none;
+    box-shadow: var(--hd-shadow-md);
+  }
+
+  .hd-edu-card:hover,
+  .hd-achieve-card:hover {
+    transform: none;
+  }
+
+  .hd-stat-card:hover {
+    transform: none;
+  }
+
+  .hd-social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+    max-width: 290px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hd-social-card {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 0.95rem;
+    gap: 6px;
+  }
+
+  .hd-social-card:hover {
+    transform: none;
+  }
 
   .hd-corner-toggle,
   .hd-corner-toggle-left {
@@ -2063,7 +2169,7 @@
   }
 
   .hd-hero-badge {
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 0.78rem;
     padding: 3px 8px;
   }
@@ -2088,7 +2194,13 @@
   }
 
   .hd-social-grid {
-    grid-template-columns: 1fr;
+    max-width: 260px;
+    gap: 8px;
+  }
+
+  .hd-social-card {
+    padding: 10px 8px;
+    font-size: 0.9rem;
   }
 
   /* About < 480px */
@@ -2220,16 +2332,25 @@
   }
 }
 
-@media (max-width: 400px) { .hd-social-grid { grid-template-columns: repeat(2, 120px); gap: 8px; } 
-.hd-social-card { width: 120px; padding: 9px 6px; font-size: 0.9rem; } 
-.hd-hero-badge {
-  margin-top: 15px;
-}
+@media (max-width: 400px) {
+  .hd-social-grid {
+    max-width: 240px;
+    gap: 7px;
+  }
+
+  .hd-social-card {
+    padding: 9px 6px;
+    font-size: 0.88rem;
+  }
+
+  .hd-hero-badge {
+    margin-top: 20px;
+  }
 }
 
 @media (max-width: 360px) {
   .hd-hero-badge{
-    margin-top: 15px;
+    margin-top: 20px;
   }
   .hd-hero-title {
     font-size: 1.85rem;
@@ -2271,7 +2392,13 @@
   .hd-stat-num {
     font-size: 1.4rem;
   }
+  .hd-social-grid {
+    max-width: 220px;
+    gap: 6px;
+  }
+
   .hd-social-card {
-    max-width: 5px;
+    padding: 8px 5px;
+    font-size: 0.82rem;
   }
 }

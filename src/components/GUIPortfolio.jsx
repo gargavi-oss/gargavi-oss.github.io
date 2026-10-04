@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   profile,
   about,
@@ -348,8 +348,29 @@ function ExperienceSection() {
 
 
 /* ─── Projects Section ─── */
+const MOBILE_PROJECT_STEP = 2
+
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth <= breakpoint : false
+  )
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`)
+    setIsMobile(mq.matches)
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [breakpoint])
+
+  return isMobile
+}
+
 function ProjectsSection() {
   const [filter, setFilter] = useState('All')
+  const [visibleCount, setVisibleCount] = useState(MOBILE_PROJECT_STEP)
+  const isMobile = useIsMobile()
 
   const getCategory = (project) => {
     const tech = (project.tech || []).map((t) => t.toLowerCase())
@@ -382,6 +403,23 @@ function ProjectsSection() {
     return getCategory(project) === filter
   })
 
+  // On mobile, slice to visible count; on desktop show all
+  const displayedProjects = isMobile
+    ? filteredProjects.slice(0, visibleCount)
+    : filteredProjects
+
+  const hasMore = isMobile && visibleCount < filteredProjects.length
+  const remainingCount = filteredProjects.length - visibleCount
+
+  const handleFilterChange = (cat) => {
+    setFilter(cat)
+    setVisibleCount(MOBILE_PROJECT_STEP) // reset on filter change
+  }
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + MOBILE_PROJECT_STEP)
+  }
+
   return (
     <section id="projects" className="hd-section hd-container">
       <div className="hd-section-header">
@@ -406,7 +444,7 @@ function ProjectsSection() {
                   key={cat}
                   type="button"
                   className={`hd-project-tab ${filter === cat ? 'active' : ''}`}
-                  onClick={() => setFilter(cat)}
+                  onClick={() => handleFilterChange(cat)}
                   aria-selected={filter === cat}
                 >
                   <span>{cat}</span>
@@ -419,7 +457,7 @@ function ProjectsSection() {
       </div>
 
       <div className="hd-projects-grid">
-        {filteredProjects.map((project, idx) => {
+        {displayedProjects.map((project, idx) => {
           const categoryTag = getCategory(project)
 
           return (
@@ -480,6 +518,20 @@ function ProjectsSection() {
           )
         })}
       </div>
+
+      {/* Load More Button — mobile only */}
+      {hasMore && (
+        <div className="hd-load-more-wrap">
+          <button
+            type="button"
+            className="hd-btn hd-load-more-btn"
+            onClick={handleLoadMore}
+          >
+            <Sparkles size={16} strokeWidth={2.4} />
+            <span>Load More ({remainingCount} left)</span>
+          </button>
+        </div>
+      )}
     </section>
   )
 }
@@ -769,7 +821,8 @@ export default function GUIPortfolio({ onSwitchMode }) {
   }
 
   return (
-    <div className={`gui-portfolio ${isDark ? 'hd-dark' : ''}`}>
+    <body className="background-web">
+       <div className={`gui-portfolio ${isDark ? 'hd-dark' : ''}`}>
       {/* Sketchpad Navigation */}
       <Nav isDark={isDark} onToggleTheme={toggleTheme} />
 
@@ -808,5 +861,8 @@ export default function GUIPortfolio({ onSwitchMode }) {
 
       <Footer />
     </div>
+
+    </body>
+   
   )
 }

@@ -20,22 +20,18 @@ export default function App() {
     return saved && THEMES.includes(saved) ? saved : DEFAULT_THEME
   })
 
-  // Apply the theme to <html> and persist it.
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
     try {
       localStorage.setItem(THEME_KEY, theme)
     } catch {
-      /* ignore storage errors (private mode) */
     }
   }, [theme])
 
-  // Persist mode preference.
   useEffect(() => {
     try {
       localStorage.setItem(MODE_KEY, mode)
     } catch {
-      /* ignore */
     }
   }, [mode])
 
