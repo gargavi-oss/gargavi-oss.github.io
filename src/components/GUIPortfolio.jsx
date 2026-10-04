@@ -214,7 +214,7 @@ function Hero() {
           className="hd-btn hd-btn-secondary"
         >
           <FileText size={18} strokeWidth={2.5} />
-          Download Resume
+          Check Resume
         </a>
 
         {/* Hand-drawn arrow annotation */}
@@ -603,7 +603,7 @@ function EducationAndHonors() {
 
           {education.map((item, idx) => {
             const isCoursework =
-              item.title.toLowerCase().includes('coursework') || item.desc.includes('·')
+              item.title.toLowerCase().includes('coursework') || (item.desc && item.desc.includes('·'))
 
             if (isCoursework) {
               const courses = item.desc
@@ -634,7 +634,19 @@ function EducationAndHonors() {
               )
             }
 
-            // Degree card: Thapar Institute
+            // Parse pipe-delimited format: Institution | Score | Duration | Location
+            const hasDelimiters = Boolean(item.desc && item.desc.includes('|'))
+            const parts = hasDelimiters ? item.desc.split('|').map((s) => s.trim()) : []
+            const institution = item.institution || (hasDelimiters ? parts[0] : '')
+            const score = item.score || (hasDelimiters ? parts[1] : '')
+            const duration = item.duration || (hasDelimiters ? parts[2] : '')
+            const location = item.location || (hasDelimiters ? parts[3] : '')
+
+            const formattedScore =
+              score && score.includes('CGPA') && !score.includes('/')
+                ? `${score} / 10`
+                : score
+
             return (
               <div key={idx} className="hd-card hd-edu-card">
                 <div className="hd-tape" />
@@ -643,25 +655,33 @@ function EducationAndHonors() {
                     <GraduationCap size={20} strokeWidth={2.4} />
                   </div>
                   <div>
-                    <h3 className="hd-edu-inst">Thapar Institute of Engineering & Technology</h3>
-                    <p className="hd-edu-degree">{item.title}</p>
+                    <h3 className="hd-edu-inst">{institution || item.title}</h3>
+                    <p className="hd-edu-degree">{institution ? item.title : item.desc}</p>
                   </div>
                 </div>
 
-                <div className="hd-edu-meta-badges">
-                  <span className="hd-edu-pill hd-edu-pill-highlight">
-                    <Star size={14} strokeWidth={2.5} />
-                    <span>CGPA 8.79 / 10</span>
-                  </span>
-                  <span className="hd-edu-pill">
-                    <Calendar size={14} strokeWidth={2.4} />
-                    <span>Aug 2024 - May 2028</span>
-                  </span>
-                  <span className="hd-edu-pill">
-                    <MapPin size={14} strokeWidth={2.4} />
-                    <span>Patiala, Punjab</span>
-                  </span>
-                </div>
+                {(score || duration || location) && (
+                  <div className="hd-edu-meta-badges">
+                    {score && (
+                      <span className="hd-edu-pill hd-edu-pill-highlight">
+                        <Star size={14} strokeWidth={2.5} />
+                        <span>{formattedScore}</span>
+                      </span>
+                    )}
+                    {duration && (
+                      <span className="hd-edu-pill">
+                        <Calendar size={14} strokeWidth={2.4} />
+                        <span>{duration}</span>
+                      </span>
+                    )}
+                    {location && (
+                      <span className="hd-edu-pill">
+                        <MapPin size={14} strokeWidth={2.4} />
+                        <span>{location}</span>
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
             )
           })}
