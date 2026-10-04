@@ -9,14 +9,15 @@ import {
   experience,
 } from './data/resume.js'
 import { THEMES } from './data/themes.js'
-import { NAME_ART, NAME_ART_MOBILE, AVATAR_ART } from './data/ascii.js'
+import { NAME_ART, NAME_ART_MOBILE } from './data/ascii.js'
 
 export const COMMAND_LIST = [
   { cmd: 'about', desc: 'about Avi garg' },
+  { cmd: 'achievements', desc: 'awards & key achievements' },
   { cmd: 'clear', desc: 'clear the terminal' },
   { cmd: 'echo', desc: 'print out anything' },
   { cmd: 'education', desc: 'my education background' },
-  { cmd: 'experience', desc: 'my technical experinece'},
+  { cmd: 'experience', desc: 'my technical experience' },
   { cmd: 'email', desc: 'send an email to me' },
   { cmd: 'gui', desc: 'open my portfolio in GUI' },
   { cmd: 'help', desc: 'check available commands' },
@@ -150,43 +151,54 @@ const Education = () => (
   </Block>
 )
 
-const Experience = () =>{
+const Experience = () => (
   <Block>
-   <Line className="text-t200">Here is my technical Experience</Line>
+    <Line className="text-t200">Here is my technical experience:</Line>
 
-{experience.map(
-  ({ id, role, highlights, duration, company, location }) => (
-    <div
-      key={id}
-      className="mt-6 border border-s2 rounded-xl p-4 bg-s1"
-    >
-      <div className="flex items-center justify-between flex-wrap">
-        <div>
-          <Line className="text-primary text-lg font-semibold">
-            {company}
-          </Line>
-          <Line className="text-t300">{role}</Line>
+    {experience.map(
+      ({ id, role, highlights, duration, company, location }) => (
+        <div
+          key={id}
+          className="mt-4 border border-s2 rounded-xl p-4 bg-s1"
+        >
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <Line className="text-primary text-lg font-semibold">
+                {company}
+              </Line>
+              <Line className="text-t300">{role}</Line>
+            </div>
+
+            <div className="text-right">
+              <Line className="text-t200">{duration}</Line>
+              <Line className="text-t300">{location}</Line>
+            </div>
+          </div>
+
+          <ul className="mt-3 list-disc pl-5 space-y-1.5">
+            {highlights.map((item, index) => (
+              <li key={index} className="text-t200 text-sm">
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
-
-        <div className="text-right">
-          <Line className="text-t200">{duration}</Line>
-          <Line className="text-t300">{location}</Line>
-        </div>
-      </div>
-
-      <ul className="mt-4 list-disc pl-5 space-y-2">
-        {highlights.map((item, index) => (
-          <li key={index} className="text-p4 text-t200">
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-)}
+      )
+    )}
   </Block>
+)
 
-}
+const Achievements = () => (
+  <Block>
+    <Line className="text-t200">Honors & Achievements:</Line>
+    {achievements.map(({ title, desc }) => (
+      <div key={title} className="mt-2">
+        <Line className="text-primary font-semibold">{title}</Line>
+        <Line className="text-t300">{desc}</Line>
+      </div>
+    ))}
+  </Block>
+)
 const Skills = () => (
   <Block>
     <Line className="text-t200">My technical toolkit:</Line>
@@ -202,7 +214,9 @@ const Skills = () => (
 
 const Projects = ({ args }) => {
   if (args.length > 0) {
-    return isArgInvalid(args, 'go', ['1', '2', '3']) ? <Usage cmd="projects" /> : null
+    return isArgInvalid(args, 'go', projects.map((p) => String(p.id))) ? (
+      <Usage cmd="projects" />
+    ) : null
   }
   return (
     <Block>
@@ -222,7 +236,7 @@ const Projects = ({ args }) => {
 
 const Socials = ({ args }) => {
   if (args.length > 0) {
-    return isArgInvalid(args, 'go', ['1', '2', '3', '4']) ? (
+    return isArgInvalid(args, 'go', socials.map((s) => String(s.id))) ? (
       <Usage cmd="socials" />
     ) : null
   }
@@ -295,12 +309,14 @@ export function renderCommand(cmd, args, ctx) {
   switch (cmd) {
     case 'about':
       return <About />
+    case 'achievements':
+      return <Achievements />
     case 'echo':
       return <Echo args={args} />
     case 'education':
       return <Education />
     case 'experience':
-      return <Experience/>
+      return <Experience />
     case 'email':
       return <Email />
     case 'gui':
@@ -317,7 +333,7 @@ export function renderCommand(cmd, args, ctx) {
       return (
         <Line>
           <span className="text-t200">opening resume… </span>
-          <Ext href="/avi_garg_resume.pdf">/avi_garg_resume.pdf</Ext>
+          <Ext href="/avi_s_resume-17.pdf">/avi_s_resume-17.pdf</Ext>
         </Line>
       )
     case 'skills':

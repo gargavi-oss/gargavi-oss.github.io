@@ -31,7 +31,7 @@ function argComplete(input) {
   return null
 }
 
-export default function Terminal({ setTheme }) {
+export default function Terminal({ setTheme, onSwitchMode }) {
   const [inputVal, setInputVal] = useState('')
   const [history, setHistory] = useState([{ id: 0, raw: 'welcome' }])
   const [pointer, setPointer] = useState(-1)
@@ -70,9 +70,9 @@ export default function Terminal({ setTheme }) {
   }
 
   const runSideEffects = (cmd, args) => {
-    if (cmd === 'gui') window.open(profile.portfolio, '_blank', 'noopener')
+    if (cmd === 'gui' && onSwitchMode) onSwitchMode()
     if (cmd === 'resume')
-      window.open('/avi_garg_resume.pdf', '_blank', 'noopener')
+      window.open('/avi_s_resume-17.pdf', '_blank', 'noopener')
     if (cmd === 'email' && args.length === 0)
       window.open(`mailto:${profile.email}`, '_self')
     if (
@@ -166,6 +166,19 @@ export default function Terminal({ setTheme }) {
 
   return (
     <div className="flex  flex-col overflow-y-visible px-4 pt-4 pb-3 text-[0.92rem] sm:px-6 sm:text-base">
+      {onSwitchMode && (
+        <button
+          onClick={onSwitchMode}
+          className="fixed bottom-3 right-3 z-50 flex items-center justify-center rounded-md bg-primary/10 p-1.5 text-primary/40 border border-primary/10 hover:text-primary hover:bg-primary/20 hover:border-primary/30 transition-all duration-200 cursor-pointer"
+          title="Switch to GUI Mode"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+            <line x1="8" y1="21" x2="16" y2="21" />
+            <line x1="12" y1="17" x2="12" y2="21" />
+          </svg>
+        </button>
+      )}
 
       <div className=" overflow-y-auto">
         {ordered.map(({ id, raw }) => {

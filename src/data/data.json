@@ -1,9 +1,9 @@
 {
   "profile": {
     "name": "Avi Garg",
-    "role": "Backend & Full-Stack Developer",
+    "role": "Full-Stack Developer & Software Engineer",
     "host": "terminal.gargavi-oss.space",
-    "tagline": "B.E. Electronics & Communication @ Thapar Institute. I build scalable backend systems, full-stack web applications, and AI-powered solutions.",
+    "tagline": "B.E. Electronics & Communication @ Thapar Institute. Hands-on full-stack development across the SDLC – requirements, design, build, and unit testing.",
     "location": "Patiala, Punjab, India",
     "email": "avigarg258@gmail.com",
     "phone": "+91 7404648978",
@@ -12,22 +12,22 @@
 
   "about": {
     "intro": "Avi Garg",
-    "role": "A Backend & Full-Stack Developer",
+    "role": "Full-Stack Developer & Software Engineer",
     "location": "Patiala, India",
     "lines": [
-      "I am an undergraduate engineer passionate about backend engineering, scalable APIs, and cloud-native applications.",
-      "I enjoy building secure systems, full-stack web applications, and AI-powered software that solves real-world problems."
+      "Electronics and Communication Engineering undergraduate with hands-on full-stack development experience across the software development lifecycle – requirements analysis, design, build, and unit testing.",
+      "Strong analytical skills, attention to detail, and a track record of quickly learning new technologies, tools, and domains."
     ]
   },
 
   "education": [
     {
       "title": "B.E. in Electronics & Communication Engineering",
-      "desc": "Thapar Institute of Engineering & Technology | CGPA 8.79 | Aug 2024 - May 2028"
+      "desc": "Thapar Institute of Engineering & Technology | CGPA 8.79 | Aug 2024 - May 2028 | Patiala, Punjab"
     },
     {
-      "title": "Relevant Coursework",
-      "desc": "DBMS · Data Structures & Algorithms · Computer Networks · Design & Analysis of Algorithms · Operating Systems · OOP"
+      "title": "Core CS & Engineering Coursework",
+      "desc": "Data Structures & Algorithms · Operating Systems · Computer Networks · Distributed Systems · DBMS · REST API Design · OOP · Unit Testing"
     }
   ],
 
@@ -36,22 +36,22 @@
       "id": 1,
       "company": "S&T Consultancy Services",
       "role": "Software Engineering Intern",
-      "duration": "June 2026 - Present",
+      "duration": "June 2026 - July 2026",
       "location": "Remote",
       "highlights": [
-        "Built and maintained 8+ RESTful API endpoints using Node.js and Express.js, supporting production applications for internal and client-facing teams.",
-        "Designed and optimized PostgreSQL and MongoDB database schemas, reducing average query response time by 20%.",
-        "Debugged and resolved 3+ production issues per sprint, wrote unit and integration tests, and collaborated in Agile development workflows.",
-        "Participated in code reviews and CI/CD deployment pipelines, improving code quality and reducing release-cycle defects."
+        "Analysed requirements and performed component-level design for 8+ RESTful API endpoints using Node.js and Express.js, building and unit testing the code for production applications used by internal and client-facing teams.",
+        "Debugged and resolved 3+ production issues per sprint, performing root-cause and impact analysis and implementing fixes supported by unit and integration testing.",
+        "Reported accurate status on deliverables and flagged risks/issues to tech leads during Agile ceremonies, contributing to code reviews, CI/CD pipelines, and release activities to deliver features reliably.",
+        "Shared technical knowledge across the team through documentation and pair debugging sessions, supporting consistent engineering standards."
       ]
     }
   ],
 
   "projects": [
-     {
+    {
       "id": 1,
       "title": "AI Customer Support Platform",
-      "desc": "Full-stack multi-tenant AI customer support platform built with Next.js, TypeScript, PostgreSQL, ScaleKit, and OpenAI API. Supports organization management, role-based access control, chatbot configuration, knowledge-base management, and AI-powered customer conversations.",
+      "desc": "Multi-tenant AI customer support platform built with Next.js, TypeScript, PostgreSQL, ScaleKit, and OpenAI API. Features secure organization management, role-based access control, isolated chatbot environments, conversation history, and knowledge-base management.",
       "url": "https://github.com/gargavi-oss/Ai-CustomerSupport-ChatBot",
       "tech": [
         "Next.js",
@@ -63,61 +63,114 @@
     },
     {
       "id": 2,
-      "title": "AI-Powered Delivery Failure Prediction System",
-      "desc": "Machine learning system using XGBoost (96.18% validation accuracy) with a 61-feature pipeline and React + FastAPI dashboard for real-time delivery risk prediction.",
-      "url": "https://github.com/gargavi-oss/DeliveryFailurePredictor"
+      "title": "DocForensic Ai",
+      "desc": "Hackathon project: 6-agent LangGraph orchestration pipeline in Python & FastAPI to analyze invoices with sub-10s latency, visual forensics engine using OpenCV & Pillow (Error Level Analysis & perceptual hashing), and real-time React + TypeScript frontend with Server-Sent Events (SSE).",
+      "url": "https://github.com/gargavi-oss",
+      "tech": [
+        "React",
+        "TypeScript",
+        "Python",
+        "FastAPI",
+        "LangGraph",
+        "SQLite",
+        "OpenCV"
+      ]
     },
     {
       "id": 3,
-      "title": "Prodivity Technologies",
-      "desc": "Full-stack MERN platform for a freelance agency with secure admin dashboard, REST APIs, MongoDB, authentication, and dynamic content management.",
-      "url": "https://github.com/gargavi-oss/ProdivityTechnologies"
+      "title": "AI-Powered Delivery Failure Prediction System",
+      "desc": "Machine learning system using XGBoost (96.18% validation accuracy, 0.93 F1-score, 0.99 AUC-ROC) with a 61-feature pipeline (traffic-pressure, reliability-risk, distance-cost) and React + FastAPI dashboard for real-time delivery risk prediction.",
+      "url": "https://github.com/gargavi-oss/DeliveryFailurePredictor",
+      "tech": [
+        "Python",
+        "XGBoost",
+        "React",
+        "FastAPI",
+        "Express",
+        "Vercel",
+        "Render"
+      ]
     },
     {
       "id": 4,
-      "title": "Deep Learning Malaria Detection System",
-      "desc": "ResNet-18 based deep learning application with FastAPI backend and React frontend for malaria diagnosis using microscopic blood smear images.",
-      "url": "https://github.com/gargavi-oss/malaria_project"
+      "title": "Banking Transaction Backend API",
+      "desc": "Secure banking backend built with Node.js, Express.js, MongoDB, JWT Authentication, Docker, and REST APIs featuring multi-account management, idempotent fund transfers, and deployed on AWS EC2 & Render.",
+      "url": "https://github.com/gargavi-oss/backendBankingSystem",
+      "tech": [
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "JWT",
+        "Docker",
+        "AWS EC2"
+      ]
     },
     {
       "id": 5,
-      "title": "Banking Transaction Backend API",
-      "desc": "Secure banking backend built with Node.js, Express.js, MongoDB, JWT Authentication, Docker, and REST APIs featuring multi-account management, idempotent fund transfers, and deployed on AWS EC2 & Render.",
-      "url": "https://github.com/gargavi-oss/backendBankingSystem"
+      "title": "Prodivity Technologies",
+      "desc": "Full-stack MERN platform for a freelance agency with secure admin dashboard, REST APIs, MongoDB, authentication, and dynamic content management.",
+      "url": "https://github.com/gargavi-oss/ProdivityTechnologies",
+      "tech": [
+        "React",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Tailwind CSS"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Deep Learning Malaria Detection System",
+      "desc": "ResNet-18 based deep learning application with FastAPI backend and React frontend for malaria diagnosis using microscopic blood smear images.",
+      "url": "https://github.com/gargavi-oss/malaria_project",
+      "tech": [
+        "PyTorch",
+        "ResNet-18",
+        "FastAPI",
+        "React"
+      ]
     }
   ],
 
   "achievements": [
     {
+      "title": "Innovation Award - NioHack 2026",
+      "desc": "Built a finance-focused project as part of Team Nexora, recognized with the Innovation Award at NioHack 2026."
+    },
+    {
+      "title": "LeetCode Problem Solving",
+      "desc": "Solved 100+ Data Structures & Algorithms problems on LeetCode, strengthening problem-solving and analytical skills."
+    },
+    {
       "title": "Open Source & Version Control",
-      "desc": "Built and maintained multiple production-ready full-stack and backend projects using Git, GitHub, Docker, AWS EC2, Render, and modern development workflows."
+      "desc": "Built and maintained multiple production-ready full-stack and backend projects using Git, GitHub, Docker, AWS, Render, and modern CI/CD workflows."
     }
   ],
 
   "skills": [
     {
       "group": "Languages",
-      "items": "C++, JavaScript, TypeScript, Python, SQL"
+      "items": "C++, JavaScript, TypeScript, SQL, Python"
     },
     {
       "group": "Frameworks & Libraries",
-      "items": "Node.js, Next.js, Express.js, React.js, FastAPI, LangChain, LangGraph, Tailwind CSS, Streamlit"
+      "items": "Next.js, React.js, Node.js, Express.js, FastAPI, LangChain, Tailwind CSS"
     },
     {
-      "group": "Databases",
-      "items": "MongoDB, PostgreSQL, MySQL"
+      "group": "Databases & Design",
+      "items": "PostgreSQL, MongoDB, Database Design & Modelling"
     },
     {
-      "group": "Developer Tools",
-      "items": "Git, GitHub, Docker, Docker Compose, Postman"
+      "group": "Cloud & DevOps",
+      "items": "AWS, Docker, CI/CD, Git/GitHub, Vercel, Render, Postman"
     },
     {
-      "group": "Cloud & Deployment",
-      "items": "AWS EC2, AWS Amplify, Render, Vercel"
+      "group": "Core CS & SDLC",
+      "items": "Data Structures & Algorithms, Operating Systems, Computer Networks, Distributed Systems, REST API Design, Requirements & Impact Analysis, Unit Testing, Agile/Scrum"
     },
     {
-      "group": "Core Concepts",
-      "items": "REST APIs, JWT Authentication, DBMS, OOP, DSA, System Design, Distributed Systems"
+      "group": "Machine Learning",
+      "items": "XGBoost, Scikit-learn, Feature Engineering, Model Evaluation"
     }
   ],
 
