@@ -2073,7 +2073,7 @@
   }
 
   .hd-hero-badge {
-        margin-top: 15px;
+    margin-top: 15px;
     font-size: 0.78rem;
     padding: 3px 8px;
   }
@@ -2231,6 +2231,9 @@
 }
 
 @media (max-width: 360px) {
+  .hd-hero-badge{
+    margin-top: 15px;
+  }
   .hd-hero-title {
     font-size: 1.85rem;
   }
