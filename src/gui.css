@@ -2025,18 +2025,8 @@
     line-height: 1.45;
   }
 
-  .hd-social-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 18px;
-  }
-
-  .hd-social-card {
-    min-height: 54px;
-    padding: 8px 6px;
-    font-size: 0.86rem;
-    gap: 4px;
-  }
+.hd-social-grid { grid-template-columns: repeat(2, 130px); justify-content: center; gap: 10px; margin-bottom: 24px; } 
+.hd-social-card { width: 130px; padding: 10px 8px; font-size: 0.95rem; gap: 5px; }
 
   .hd-corner-toggle,
   .hd-corner-toggle-left {
@@ -2230,6 +2220,13 @@
   }
 }
 
+@media (max-width: 400px) { .hd-social-grid { grid-template-columns: repeat(2, 120px); gap: 8px; } 
+.hd-social-card { width: 120px; padding: 9px 6px; font-size: 0.9rem; } 
+.hd-hero-badge {
+  margin-top: 15px;
+}
+}
+
 @media (max-width: 360px) {
   .hd-hero-badge{
     margin-top: 15px;
@@ -2273,5 +2270,8 @@
   }
   .hd-stat-num {
     font-size: 1.4rem;
+  }
+  .hd-social-card {
+    max-width: 5px;
   }
 }
